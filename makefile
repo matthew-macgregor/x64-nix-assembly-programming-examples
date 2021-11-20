@@ -1,19 +1,26 @@
-ALL_EXE=hello hello-aak hello-aak2 printf-ex1
+BUILD_DIR=build
+SRC=$(wildcard *.asm)
+OBJS=$(addprefix $(BUILD_DIR)/, $(SRC:.asm=.o))
+.PHONY: clean all
 
-% : %.o
+# Keep the intermediate .o files
+.SECONDARY: $(OBJS)
+
+# == ALL ==
+all: $(patsubst %.o,%,$(OBJS)) 
+
+# == Make BUILD Dir ==
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+# == Link ==
+$(BUILD_DIR)/% : $(BUILD_DIR)/%.o | $(BUILD_DIR)
 	gcc -o $@ $^ -no-pie
 
-%.o : %.asm
-	nasm -f elf64 -g -F dwarf $^ -l $@.lst
+# == Assemble ==
+$(BUILD_DIR)/%.o : %.asm | $(BUILD_DIR)
+	nasm -f elf64 -g -F dwarf $^ -o $@ -l $@.lst --keep-all
 
-#$(HW): $(HW).o
-#	gcc -o $(HW) $(HW).o -no-pie
-
-#$(HW).o: $(HW).asm
-#	nasm -f elf64 -g -F dwarf $(HW).asm -l $(HW).lst
-
-all: $(ALL_EXE)
-
-PHONY: clean
 clean:
-	rm -f *.o *.lst $(ALL_EXE)
+	rm -rf $(BUILD_DIR)
+
