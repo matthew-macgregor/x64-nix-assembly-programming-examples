@@ -1,0 +1,9 @@
+*.o
+*.swp
+*.lst
+
+# executables
+printf-ex1
+hello
+hello-aak
+hello-aak2

@@ -1,0 +1,4 @@
+# GDB:
+set disassembly-flavor intel
+disassemble <label>
+
