@@ -1,26 +1,17 @@
-BUILD_DIR=build
-SRC=$(wildcard *.asm)
-OBJS=$(addprefix $(BUILD_DIR)/, $(SRC:.asm=.o))
-.PHONY: clean all
+SUBDIRS := $(wildcard src/*/.)
 
-# Keep the intermediate .o files
-.SECONDARY: $(OBJS)
+.PHONY: update-makefiles clean all run $(SUBDIRS)
 
-# == ALL ==
-all: $(patsubst %.o,%,$(OBJS)) 
-
-# == Make BUILD Dir ==
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
-
-# == Link ==
-$(BUILD_DIR)/% : $(BUILD_DIR)/%.o | $(BUILD_DIR)
-	gcc -o $@ $^ -no-pie
-
-# == Assemble ==
-$(BUILD_DIR)/%.o : %.asm | $(BUILD_DIR)
-	nasm -f elf64 -g -F dwarf $^ -o $@ -l $@.lst --keep-all
+all: $(SUBDIRS) | update-makefiles
 
 clean:
-	rm -rf $(BUILD_DIR)
+	@for i in $(SUBDIRS); do cd $$i && $(MAKE) clean && cd ../..; done
 
+update-makefiles:
+	@for i in $(SUBDIRS); do cp makefile.template $$i/makefile; done
+
+run: all
+	@for d in $(SUBDIRS); do echo "  <}}== Running $$d ==={{>" && $$d/build/program; done
+
+$(SUBDIRS):
+	cd $@ && $(MAKE)

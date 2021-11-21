@@ -2,8 +2,7 @@
 *.swp
 *.lst
 build/
+src/**/makefile
+
 # executables
-printf-ex1
-hello
-hello-aak
-hello-aak2
+program
