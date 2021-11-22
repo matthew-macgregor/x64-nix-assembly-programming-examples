@@ -2,6 +2,10 @@
 BUILD_DIR=build
 SRC=$(wildcard *.asm)
 OBJS=$(addprefix $(BUILD_DIR)/, $(SRC:.asm=.o))
+
+MAKEFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
+MAKEFILE_DIR := $(dir $(MAKEFILE_PATH))
+
 .PHONY: clean all
 
 # Keep the intermediate .o files
@@ -21,7 +25,7 @@ $(BUILD_DIR)/% : $(BUILD_DIR)/%.o | $(BUILD_DIR)
 
 # == Assemble ==
 $(BUILD_DIR)/%.o : %.asm | $(BUILD_DIR)
-	nasm -f elf64 -g -F dwarf $^ -o $@ -l $@.lst --keep-all -p "../constants.inc"
+	nasm -f elf64 -g -F dwarf $^ -o $@ -l $@.lst --keep-all -p "$(MAKEFILE_DIR)../constants.inc"
 
 clean:
 	rm -rf $(BUILD_DIR)

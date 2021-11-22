@@ -11,7 +11,7 @@ update-makefiles:
 	@for i in $(SUBDIRS); do cp makefile.template $$i/makefile; done
 
 run: all
-	@for d in $(SUBDIRS); do echo "  <}}== Running $$d ==={{>" && $$d/build/program; done
+	@for d in $(SUBDIRS); do echo "== Running $$d ==" && $$d/build/program; done
 
 $(SUBDIRS):
 	cd $@ && $(MAKE)
