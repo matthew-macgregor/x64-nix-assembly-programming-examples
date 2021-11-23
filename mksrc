@@ -6,6 +6,7 @@ dir=$1
 
 target_dir="./src/$dir"
 target_file="$target_dir/$dir.asm"
+target_makefile="$target_dir/makefile"
 
 if [[ ! -d "$target_dir" ]]; then
 	mkdir -p "$target_dir"
@@ -15,9 +16,12 @@ if [[ ! -f "$target_file" ]]; then
 	touch "$target_file"
 fi
 
-make update-makefiles
+# sets up the initial makefile in the subdirectory
+if [[ ! -f "$target_makefile" ]]; then
+	cp makefile.template "$target_makefile"
+fi
 
 echo "Ok, created '$dir' at $target_file"
 read -n 1 -p "Press any key..."
-vim "$target_file" -c "set background=dark" -c "set ft=nasm"
+vim "$target_file" -c "set background=dark" -c "set ft=nasm" -c "set number"
 
