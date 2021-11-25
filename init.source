@@ -1,3 +1,5 @@
+PATH="$PATH":`pwd`
+
 # Set a few vim presets
 alias v="vim -c 'set background=dark' -c 'set number'"
 alias vnasm="vim -c 'set background=dark' -c 'set number' -c 'set ft=nasm'"

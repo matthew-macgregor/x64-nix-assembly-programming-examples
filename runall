@@ -1,0 +1,12 @@
+#!/bin/bash
+
+for dir in $(ls ./src/); do
+	exe=$dir
+	echo "========================================= $dir" 
+	if [[ -f "./src/$dir/run" ]]; then
+		"./src/$dir/run"
+	elif [[ -f "./src/$dir/build/$exe" ]]; then
+		"./src/$dir/build/$exe"
+	fi
+	echo
+done

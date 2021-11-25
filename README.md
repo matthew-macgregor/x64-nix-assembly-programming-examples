@@ -6,6 +6,9 @@ of the examples were modified from the original, or were only inspired by those
 in the book. Others may be unrelated to the book as I tried out other things in
 order to understand concepts.
 
+All of the examples here, regardless of modifications from the examples in the
+book, were hand typed in order to get familiar with the code. No copy-pasta!
+
 Additional or modified code is Copyright &copy; 2021 Matthew MacGregor, and
 licensed under the same Freeware License as the original. See
 [License](LICENSE.txt) for details.
