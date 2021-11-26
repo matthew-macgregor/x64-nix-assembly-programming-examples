@@ -21,7 +21,7 @@ $(BUILD_DIR):
 # == Link ==
 $(BUILD_DIR)/% : $(BUILD_DIR)/%.o | $(BUILD_DIR)
 	gcc -o $@ $^ -no-pie
-	cp $@ $(BUILD_DIR)/program
+	ln -s $(abspath $@) $(abspath $(BUILD_DIR)/program)
 
 # == Assemble ==
 $(BUILD_DIR)/%.o : %.asm | $(BUILD_DIR)

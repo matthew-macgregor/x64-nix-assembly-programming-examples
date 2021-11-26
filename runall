@@ -4,9 +4,14 @@ for dir in $(ls ./src/); do
 	exe=$dir
 	echo "========================================= $dir" 
 	if [[ -f "./src/$dir/run" ]]; then
+		echo "==> Running run file"
 		"./src/$dir/run"
 	elif [[ -f "./src/$dir/build/$exe" ]]; then
+		echo "==> Running direct"
 		"./src/$dir/build/$exe"
+	else
+		echo "==> Running from makefile"
+		make --directory="./src/$dir/" run
 	fi
 	echo
 done
