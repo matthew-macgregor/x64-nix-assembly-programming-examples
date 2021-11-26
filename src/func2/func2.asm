@@ -67,6 +67,7 @@ main:
 
 	call	circle
 
+	mov	rax, 0			; success
 leave
 ret
 

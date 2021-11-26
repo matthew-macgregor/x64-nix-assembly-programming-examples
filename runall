@@ -1,7 +1,9 @@
 #!/bin/bash
 
-for dir in $(ls ./src/); do
+for dir in $(ls -p ./src/ | grep /); do
+	
 	exe=$dir
+
 	echo "========================================= $dir" 
 	if [[ -f "./src/$dir/run" ]]; then
 		echo "==> Running run file"
@@ -9,9 +11,13 @@ for dir in $(ls ./src/); do
 	elif [[ -f "./src/$dir/build/$exe" ]]; then
 		echo "==> Running direct"
 		"./src/$dir/build/$exe"
+	elif [[ -f "./src/$dir/build/program" ]]; then
+		echo "==> Running ./build/program"
+		"./src/$dir/build/program"
 	else
 		echo "==> Running from makefile"
 		make --directory="./src/$dir/" run
 	fi
+	[[ $? -ne 0 ]] && echo "ERROR" && exit 1
 	echo
 done

@@ -20,7 +20,8 @@ main:
 	movsd	xmm1, [radius]	; print the radius as well 
 	mov	rax, 2		; there are two xmm register to print 
 	call	printf
-	
+
+	xor	rax, rax	; success	
 
 leave				; epilogue (simple version)
 

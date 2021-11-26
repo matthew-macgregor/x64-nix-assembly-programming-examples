@@ -42,7 +42,7 @@ main:
     mov rdi, strOut     ; prints <Memory>
 	call printf
 
-    mov rax, 15          ; Success
+    xor rax, rax        ; Success
 
     mov rsp, rbp        ; epilogue
     pop rbp

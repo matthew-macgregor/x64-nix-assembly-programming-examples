@@ -239,6 +239,6 @@ section .text
 	mov	rsi, [modulo] 
 	call	display_resulti
 
-	;call	print_nl
+	xor 	rax, rax
 leave
 ret

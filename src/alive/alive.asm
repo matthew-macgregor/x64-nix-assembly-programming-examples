@@ -79,6 +79,6 @@ main:
 	;mov rax, EXIT		; exit
 	;mov rdi, 0		; success exit code
 	;syscall		; bye
-
-	ret	
+	mov rax, 0
+ret	
 

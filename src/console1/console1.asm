@@ -1,9 +1,11 @@
 ; console1.asm
 
+%define	exit_success	xor rax, rax
+
 section .data
 	msg1		db	"Enter some text:",EOL,0
 	msg1len		equ	$-msg1
-	msg2		db	">>",0
+	msg2		db	">> ",0
 	msg2len		equ	$-msg2
 	inputlen 	equ	10		; buffer size
 section .bss
@@ -28,6 +30,7 @@ main:
 	mov	rdi, input
 	call	better_prints
 
+	exit_success
 leave
 ret
 
@@ -68,7 +71,6 @@ better_prints:
 
 	xor	rdx, rdx	; length
 	mov	r12, rdi	; str
-
 .lengthloop:
 	cmp	byte [r12], 0
 	je	.lengthfound
@@ -92,6 +94,9 @@ ret
 ; rdi = buffer len
 better_reads:
 section .data
+	lowercase_a	equ	97
+	lowercase_z	equ	122
+
 section .bss
 	.inputchar	resb	1
 section .text
@@ -107,6 +112,17 @@ section .text
 	xor	r14, r14	; clear it, r14 becomes our counter
 
 .readc:
+
+%macro ignore_if_lt_lowercase_a 0
+	cmp	al, lowercase_a
+	jl	.readc
+%endmacro
+
+%macro	ignore_if_gt_lowercase_z 0
+	cmp	al, lowercase_z
+	jg	.readc
+%endmacro
+
 	mov	rax, READ	
 	mov	rdi, STDIN
 	lea	rsi, [.inputchar] 	; address of input
@@ -116,10 +132,8 @@ section .text
 	mov	al, [.inputchar]
 	cmp	al, byte EOL
 	je	.done
-	cmp	al, 97
-	jl	.readc			; ignore characters less than a
-	cmp	al, 122			; greater than z, ignore
-	jg	.readc
+	ignore_if_lt_lowercase_a	; macros make it a little more readable
+	ignore_if_gt_lowercase_z
 	inc	r14
 	cmp	r14, r13
 	ja	.readc			; buffer max
@@ -134,5 +148,6 @@ section .text
 	pop	r14
 	pop	r13
 	pop	r12
+	
 leave
 ret

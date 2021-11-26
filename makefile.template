@@ -21,11 +21,14 @@ $(BUILD_DIR):
 # == Link ==
 $(BUILD_DIR)/% : $(BUILD_DIR)/%.o | $(BUILD_DIR)
 	gcc -o $@ $^ -no-pie
-	ln -s $(abspath $@) $(abspath $(BUILD_DIR)/program)
+	ln -sf $(abspath $@) $(abspath $(BUILD_DIR)/program)
 
 # == Assemble ==
 $(BUILD_DIR)/%.o : %.asm | $(BUILD_DIR)
-	nasm -f elf64 -g -F dwarf $^ -o $@ -l $@.lst --keep-all -p "$(MAKEFILE_DIR)../constants.inc"
+	nasm -f elf64 -g -F dwarf $^ -o $@ -l $@.lst --keep-all #-p "$(MAKEFILE_DIR)../constants.inc"
+
+run: all
+	$(BUILD_DIR)/program
 
 clean:
 	rm -rf $(BUILD_DIR)

@@ -6,10 +6,12 @@
 ; dd Double Word 	(32 bits)
 ; dq Quad Word		(64 bits)
 
+%include "../constants.inc"
+
 ; Initialized Variables & Constants
 ; ------------------------------------------------------ ;
 section .data
-    msg    	db		"Hello, world",0xa,0
+	msg    	db		"Hello, world",0xa,0
 	strlen 	equ		13
 
 ; resb Byte
