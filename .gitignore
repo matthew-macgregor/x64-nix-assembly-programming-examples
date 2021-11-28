@@ -2,7 +2,6 @@
 *.swp
 *.lst
 build/
-src/**/makefile
 testfile.txt
 # executables
 program
