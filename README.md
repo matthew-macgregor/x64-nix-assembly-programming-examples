@@ -32,7 +32,7 @@ code used throughout assumes POSIX system calls. It has been tested from
 several Linux OS distributions (Ubuntu 20.04, Fedora 35) and Windows Subsystem
 for Linux.
 
-Created with: `NASM version 2.14.02`, but other versions may work.
+Created with: `NASM version 2.14.02`, `NASM version 2.15.05`, but other versions may work.
 
 - To build all: `make all`
 - To build and run all: `make run`
