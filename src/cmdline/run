@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./build/program -a argone -b argtwo -c argthree

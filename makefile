@@ -13,5 +13,8 @@ clean:
 run: all
 	./runall
 
+run-%:
+	./runall $(@:run-%=%)
+
 $(SUBDIRS):
 	cd $@ && $(MAKE)

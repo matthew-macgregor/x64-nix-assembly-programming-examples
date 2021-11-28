@@ -36,4 +36,4 @@ Created with: `NASM version 2.14.02`, but other versions may work.
 
 - To build all: `make all`
 - To build and run all: `make run`
-
+- To run a single target: `make run-{target_name}`

@@ -148,6 +148,23 @@ write_error:
 	call	print_string
 ret
 
+global	append_file
+append_file:
+	mov	rax, NR_OPEN
+	mov	rsi, O_RDWR|O_APPEND
+	syscall
+	cmp	rax, 0
+	jl	append_error
+	mov	rdi, m_ok_append
+	push	rax
+	call	print_string
+	pop	rax
+	ret	
+append_error:
+	mov	rdi, m_error_append
+	call	print_string
+ret
+
 ; TODO: improve with locals
 global close_file
 close_file:

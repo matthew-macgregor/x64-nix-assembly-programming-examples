@@ -1,23 +1,47 @@
 #!/bin/bash
 
-for dir in $(ls -p ./src/ | grep /); do
-	
-	exe=$dir
+set -e
 
-	echo "========================================= $dir" 
-	if [[ -f "./src/$dir/run" ]]; then
+function run {
+	exe=$1
+
+	if [[ -z "$exe" ]]; then
+		echo "In run: nothing to do"
+		return 0
+	fi
+
+	pushd "./src/$exe" > /dev/null
+	echo "========================================= $exe" 
+	if [[ -f "./run" ]]; then
 		echo "==> Running run file"
-		"./src/$dir/run"
-	elif [[ -f "./src/$dir/build/$exe" ]]; then
+		"./run"
+	elif [[ -f "./build/$exe" ]]; then
 		echo "==> Running direct"
-		"./src/$dir/build/$exe"
-	elif [[ -f "./src/$dir/build/program" ]]; then
+		"./build/$exe"
+	elif [[ -f "./build/program" ]]; then
 		echo "==> Running ./build/program"
-		"./src/$dir/build/program"
+		"./build/program"
 	else
 		echo "==> Running from makefile"
-		make --directory="./src/$dir/" run
+		make run
 	fi
-	[[ $? -ne 0 ]] && echo "ERROR" && exit 1
-	echo
-done
+	popd > /dev/null
+	err=$?
+	echo "Exit Code => $err"
+	if [[ $err -gt 0 ]]; then 
+		echo "ERROR"
+		return 1
+	fi
+}
+
+if [[ $# -gt 0 ]]; then
+	while [[ $# -gt 0 ]]
+	do
+		run "$1"
+		shift
+	done
+else
+	for dir in $(ls -p ./src/ | grep /); do
+		run "$dir"
+	done
+fi
