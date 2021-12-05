@@ -1,4 +1,4 @@
-PATH="$PATH":`pwd`
+PATH="$PATH":`pwd`/scripts
 
 # Set a few vim presets
 alias v="vim -c 'set background=dark' -c 'set number'"
