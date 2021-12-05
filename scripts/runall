@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PDIR="$DIR/.."
+
 set -e
 
 function run {
@@ -10,7 +13,7 @@ function run {
 		return 0
 	fi
 
-	pushd "./src/$exe" > /dev/null
+	pushd "$PDIR/src/$exe" > /dev/null
 	echo "========================================= $exe" 
 	if [[ -f "./run" ]]; then
 		echo "==> Running run file"
@@ -41,7 +44,7 @@ if [[ $# -gt 0 ]]; then
 		shift
 	done
 else
-	for dir in $(ls -p ./src/ | grep /); do
+	for dir in $(ls -p $PDIR/src/ | grep /); do
 		run "$dir"
 	done
 fi

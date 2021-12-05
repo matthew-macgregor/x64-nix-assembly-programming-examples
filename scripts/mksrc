@@ -1,10 +1,13 @@
 #!/bin/bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PDIR="$DIR/.."
+
 dir=$1
 
 [[ -z $dir ]] && echo "name is required" && exit 1
 
-target_dir="./src/$dir"
+target_dir="$PDIR/src/$dir"
 target_file="$target_dir/$dir.asm"
 target_makefile="$target_dir/makefile"
 

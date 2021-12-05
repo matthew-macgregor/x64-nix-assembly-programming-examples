@@ -16,7 +16,7 @@ licensed under the same Freeware License as the original. See
 Specific additions or modifications:
 - Makefiles: the build system is original to this repository, allowing 
   `make all` and `make run` to build/run all examples.
-- Helpers: `mksrc` script creates new example directories. `init.source` for
+- Helpers: `scripts/mksrc` script creates new example directories. `scripts/init.source` for
   initializing environment variables and aliases.
 - Explanatory inline comments for clarity of sections of code I found
   confusing.

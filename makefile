@@ -11,10 +11,10 @@ clean:
 #	@for i in $(SUBDIRS); do cp makefile.template $$i/makefile; done
 
 run: all
-	./runall
+	./scripts/runall
 
 run-%:
-	./runall $(@:run-%=%)
+	./scripts/runall $(@:run-%=%)
 
 $(SUBDIRS):
 	cd $@ && $(MAKE)
