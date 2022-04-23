@@ -40,7 +40,7 @@ main:
     mov rax, [text1+1]  ; load value char 2
 
     mov rdi, strOut     ; prints <Memory>
-	call printf
+    call printf
 
     xor rax, rax        ; Success
 

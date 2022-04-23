@@ -65,7 +65,7 @@ main:
 
 	mov rdi, piStr
 	movq xmm0, [pi]
-	mov rax, 1		; use 1 xmm register 
+	mov rax, 1			; use 1 xmm register 
 	call printf
 
 	mov rdi, radStr
@@ -77,8 +77,8 @@ main:
 	pop rbp	
 	
 	;mov rax, EXIT		; exit
-	;mov rdi, 0		; success exit code
-	;syscall		; bye
+	;mov rdi, 0			; success exit code
+	;syscall			; bye
 	mov rax, 0
 ret	
 

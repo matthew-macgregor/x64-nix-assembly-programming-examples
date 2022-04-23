@@ -28,7 +28,7 @@ $(BUILD_DIR)/%.o : %.asm | $(BUILD_DIR)
 	nasm -f elf64 -g -F dwarf $^ -o $@ -l $@.lst --keep-all
 
 run:
-	./build/program
+	./build/hello
 
 clean:
 	rm -rf $(BUILD_DIR)

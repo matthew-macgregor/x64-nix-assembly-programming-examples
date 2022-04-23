@@ -28,7 +28,7 @@ $(BUILD_DIR)/%.o : %.asm | $(BUILD_DIR)
 	nasm -f elf64 -g -F dwarf $^ -o $@ -l $@.lst --keep-all #-p "$(MAKEFILE_DIR)../constants.inc"
 
 run: all
-	$(BUILD_DIR)/program
+	$(BUILD_DIR)/strings
 
 clean:
 	rm -rf $(BUILD_DIR)
