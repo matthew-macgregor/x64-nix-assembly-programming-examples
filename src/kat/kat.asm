@@ -37,6 +37,9 @@ print_args:
 	mov	rbx, 2		; counter starts at first in vec
 	mov	r12, [rsp]	; save value of argc
 
+	cmp	r12, 1		; argc == 1: executable name
+	je	exit
+
 ;; = = = MAIN =================================== = = = ;;
 main_loop:
 %ifdef DEBUG

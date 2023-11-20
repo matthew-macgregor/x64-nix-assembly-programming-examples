@@ -17,10 +17,10 @@ function run {
 	echo "========================================= $exe" 
 	if [[ -f "./run" ]]; then
 		echo "==> Running run file"
-		"./run"
+		"./run" 
 	elif [[ -f "./build/$exe" ]]; then
 		echo "==> Running direct"
-		"./build/$exe"
+		"./build/$exe" 
 	elif [[ -f "./build/program" ]]; then
 		echo "==> Running ./build/program"
 		"./build/program"
